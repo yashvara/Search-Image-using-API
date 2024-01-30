@@ -6,7 +6,7 @@ import loadingAnimation from './assets/animation/loading.json';
 import searchanimation from './assets/animation/search.json';
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
-const IMAGES_PER_PAGE = 15;
+const IMAGES_PER_PAGE = 20;
 
 function ImageSearchApp() {
   const searchInputRef = useRef(null);
@@ -15,6 +15,7 @@ function ImageSearchApp() {
   const [totalPages, setTotalPages] = useState(0);
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const fetchImages = useCallback(async () => {
     try {
@@ -49,9 +50,12 @@ function ImageSearchApp() {
     resetSearch();
   };
 
-  const handleSelection = (selection) => {
-    searchInputRef.current.value = selection;
-    resetSearch();
+  const openImage = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const closeImage = () => {
+    setSelectedImage(null);
   };
 
   return (
@@ -81,7 +85,13 @@ function ImageSearchApp() {
         <>
           <div className='images'>
             {searchResults.map((image) => (
-              <img key={image.id} src={image.urls.small} alt={image.alt_description} className='image' />
+              <img
+                key={image.id}
+                src={image.urls.small}
+                alt={image.alt_description}
+                className='image'
+                onClick={() => openImage(image.urls.full)}
+              />
             ))}
           </div>
           <div className='buttons'>
@@ -93,6 +103,16 @@ function ImageSearchApp() {
             )}
           </div>
         </>
+      )}
+      {selectedImage && (
+        <div className='lightbox' onClick={closeImage}>
+          <div className='lightbox-content' onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage} alt='Expanded' className='lightbox-image' />
+            <button className='close-button' onClick={closeImage}>
+              Close
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

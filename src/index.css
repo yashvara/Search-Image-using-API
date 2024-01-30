@@ -11,7 +11,7 @@
 }
 
 .container {
-  max-width: 2000px;
+  max-width: 1500px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -45,10 +45,17 @@
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
+  transition: background-color 1s, color 0.3s, box-shadow 0.3s;
+  border-radius: 10%;
 }
 
 .buttons .btn:hover {
-  background-color: #1b75b1; 
+  background-color: #1b75b1;
+  color: #fff;
+  box-shadow: 0 3px 6px rgba(228, 228, 228, 0.1);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 1s, color 0.3s, box-shadow 0.3s;
 }
 
 .error-msg {
@@ -96,8 +103,6 @@
   font-size: 0.9rem;
 }
 
-
-
 .images {
   margin-top: var(--medium-margin);
   display: grid;
@@ -111,38 +116,64 @@
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  object-fit: cover;
   transition: transform 0.3s;
   cursor: pointer;
 }
 
 .images .image:hover {
   transform: scale(1.05);
+  cursor: pointer;
 }
 
-
-@media (max-width: 768px) {
-  .images {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.expanded-image-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: hidden;
+  border-radius: 10px;
+  z-index: 999; /* Ensure it's above other content */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 480px) {
-  .search-section .search-input {
-    width: 100%;
-    min-width: unset;
-    margin: 0;
-  }
+.expanded-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
-  .images {
-    grid-template-columns: 1fr;
-  }
+.expanded-image img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #1b75b1;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.close-button:hover {
+  background-color: #15598a;
 }
 
 .center {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 100vh;
 }
 
 .search-animation {
@@ -150,4 +181,30 @@
   align-items: center;
   justify-content: center;
   height: 10vh;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: hidden;
+}
+
+.lightbox-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
