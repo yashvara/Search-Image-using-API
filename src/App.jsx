@@ -1,9 +1,9 @@
 import axios from 'axios';
 import Lottie from 'lottie-react';
-import loadingAnimation from './assets/animation/loading.json';
-import searchanimation from './assets/animation/search.json'
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import loadingAnimation from './assets/animation/loading.json';
+import searchanimation from './assets/animation/search.json';
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const IMAGES_PER_PAGE = 15;
@@ -22,11 +22,7 @@ function ImageSearchApp() {
         setErrorMsg('');
         setLoading(true);
         const { data } = await axios.get(
-          `${UNSPLASH_API_URL}?query=${
-            searchInputRef.current.value
-          }&page=${currentPage}&per_page=${IMAGES_PER_PAGE}&client_id=${
-            import.meta.env.VITE_API_KEY
-          }`
+          `${UNSPLASH_API_URL}?query=${searchInputRef.current.value}&page=${currentPage}&per_page=${IMAGES_PER_PAGE}&client_id=${import.meta.env.VITE_API_KEY}`
         );
         setSearchResults(data.results);
         setTotalPages(data.total_pages);
@@ -59,13 +55,9 @@ function ImageSearchApp() {
   };
 
   return (
-    
     <div className='container'>
       <div className='search-animation'>
-        <Lottie
-          animationData={searchanimation}
-          style={{ width: '200px', height: '200px' }} 
-        />
+        <Lottie animationData={searchanimation} style={{ width: '200px', height: '200px' }} />
       </div>
       <h1 className='title'>Search your images here</h1>
       {errorMsg && <p className='error-msg'>{errorMsg}</p>}
@@ -81,23 +73,15 @@ function ImageSearchApp() {
       </div>
       {loading ? (
         <div className='loading'>
-           <div className='center'>
-            <Lottie
-              animationData={loadingAnimation}
-              style={{ width: '200px', height: '200px' }} 
-            />
+          <div className='center'>
+            <Lottie animationData={loadingAnimation} style={{ width: '200px', height: '200px' }} />
           </div>
-      </div>
+        </div>
       ) : (
         <>
           <div className='images'>
             {searchResults.map((image) => (
-              <img
-                key={image.id}
-                src={image.urls.small}
-                alt={image.alt_description}
-                className='image'
-              />
+              <img key={image.id} src={image.urls.small} alt={image.alt_description} className='image' />
             ))}
           </div>
           <div className='buttons'>

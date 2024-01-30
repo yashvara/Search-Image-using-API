@@ -7,11 +7,7 @@
   --medium-margin: 3.5rem;
   --larger-margin: 6rem;
   --primary-color: #1b75b1; 
-}
-
-body {
-  color: #555; 
-  background-color: #f8f8f8; 
+  background-color: #242424;
 }
 
 .container {
