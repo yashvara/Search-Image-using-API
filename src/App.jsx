@@ -5,6 +5,9 @@ import { Button, Form } from "react-bootstrap";
 import loadingAnimation from "./assets/animation/loading.json";
 import searchanimation from "./assets/animation/search.json";
 import { FaDownload, FaTimes } from "react-icons/fa";
+import githubIcon from './assets/icons/github.png';
+import linkedinIcon from './assets/icons/linkedin.png';
+import './App.css'; 
 
 const UNSPLASH_API_URL = "https://api.unsplash.com/search/photos";
 const IMAGES_PER_PAGE = 20;
@@ -147,7 +150,7 @@ function ImageSearchApp() {
             />
             <div className="close-download-container">
               <button className="close-button" onClick={closeImage}>
-                <FaTimes size={15}/>
+                <FaTimes size={15} />
               </button>
               <button onClick={handleDownload} className="download-button">
                 <FaDownload size={15} />
@@ -156,6 +159,17 @@ function ImageSearchApp() {
           </div>
         </div>
       )}
+      <footer className="footer">
+        <p className="footer-text">Developed by Yash Vara</p>
+        <div className="footer-links">
+          <a href="https://github.com/yashvara" target="_blank" rel="noopener noreferrer">
+            <img src={githubIcon} alt="GitHub" className="footer-icon" />
+          </a>
+          <a href="https://www.linkedin.com/in/yash-vara-4795001b8/" target="_blank" rel="noopener noreferrer">
+            <img src={linkedinIcon} alt="LinkedIn" className="footer-icon" />
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }

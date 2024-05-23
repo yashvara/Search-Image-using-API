@@ -1,42 +1,75 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer {
   text-align: center;
+  background-color: #15598a;
+  padding: 10px 0;
+  border-radius: 4%;
+  width: 100%;
+  margin-top: auto;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.footer-text {
+  color: white;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.footer-links {
+  margin-top: 10px;
+}
+
+.footer-links a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.footer-icon {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 8px 0;
+    font-size: 14px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .footer-links a {
+    margin: 0 8px;
+  }
+
+  .footer-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .container {
+    padding-bottom: 50px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  .footer {
+    padding: 6px 0;
+    font-size: 12px;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .footer-links a {
+    margin: 0 6px;
+  }
 
-.read-the-docs {
-  color: #888;
+  .footer-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .container {
+    padding-bottom: 60px;
+  }
 }
