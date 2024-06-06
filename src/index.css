@@ -199,11 +199,11 @@
 
 .lightbox-content {
   position: relative;
-  width: 80%; /* Adjust width as needed */
-  height: 100%; /* Adjust height as needed */
-  max-width: 800px; /* Maximum width of the box */
-  max-height: 600px; /* Maximum height of the box */
-  overflow: auto; /* Add scrollbar if content exceeds dimensions */
+  width: 80%; 
+  height: 100%; 
+  max-width: 800px; 
+  max-height: 600px; 
+  overflow: auto; 
 }
 
 .lightbox-image {
@@ -227,7 +227,7 @@
 .download-button {
   position: absolute;
   top: 67px;
-  right: calc(20px - 10px); /* Adjust the right position to leave space between close and download buttons */
+  right: calc(20px - 10px); 
   background-color: var(--primary-color);
   color: #fff;
   padding: 10px 20px;

@@ -7,7 +7,7 @@ import searchanimation from "./assets/animation/search.json";
 import { FaDownload, FaTimes } from "react-icons/fa";
 import githubIcon from './assets/icons/github.png';
 import linkedinIcon from './assets/icons/linkedin.png';
-import './App.css'; 
+import './App.css';
 
 const UNSPLASH_API_URL = "https://api.unsplash.com/search/photos";
 const IMAGES_PER_PAGE = 20;
@@ -20,6 +20,7 @@ function ImageSearchApp() {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [searchKey, setSearchKey] = useState(0); 
 
   const fetchImages = useCallback(async () => {
     try {
@@ -27,22 +28,22 @@ function ImageSearchApp() {
         setErrorMsg("");
         setLoading(true);
         const { data } = await axios.get(
-          `${UNSPLASH_API_URL}?query=${
-            searchInputRef.current.value
-          }&page=${currentPage}&per_page=${IMAGES_PER_PAGE}&client_id=${
-            import.meta.env.VITE_API_KEY
-          }`
+          `${UNSPLASH_API_URL}?query=${searchInputRef.current.value}&page=${currentPage}&per_page=${IMAGES_PER_PAGE}&client_id=${import.meta.env.VITE_API_KEY}`
         );
-        setSearchResults(data.results);
-        setTotalPages(data.total_pages);
+        if (data.results.length === 0) {
+          setErrorMsg("No photos found. Please try some different search item.");
+        } else {
+          setSearchResults(data.results);
+          setTotalPages(data.total_pages);
+        }
         setLoading(false);
       }
     } catch (error) {
-      setErrorMsg("Please check your internet connection and try again.");
+      setErrorMsg("No photos found. Please try some different search item.");
       console.error(error);
       setLoading(false);
     }
-  }, [currentPage]);
+  }, [currentPage, searchKey]); 
 
   useEffect(() => {
     fetchImages();
@@ -50,7 +51,7 @@ function ImageSearchApp() {
 
   const resetSearch = () => {
     setCurrentPage(1);
-    fetchImages();
+    setSearchKey((prevKey) => prevKey + 1); 
   };
 
   const handleSearch = (event) => {
@@ -82,6 +83,41 @@ function ImageSearchApp() {
         console.error("Error downloading image: ", error);
       }
     }
+  };
+
+  const renderPagination = () => {
+    const pageNumbers = [];
+    const maxPagesToShow = 7;
+    const startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+    const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(
+        <Button
+          key={i}
+          onClick={() => setCurrentPage(i)}
+          className={`pagination-button ${i === currentPage ? "active-page" : ""}`}
+        >
+          {i}
+        </Button>
+      );
+    }
+
+    return (
+      <div className="pagination">
+        {startPage > 1 && (
+          <Button onClick={() => setCurrentPage(startPage - 1)} className="pagination-button">
+            «
+          </Button>
+        )}
+        {pageNumbers}
+        {endPage < totalPages && (
+          <Button onClick={() => setCurrentPage(endPage + 1)} className="pagination-button">
+            »
+          </Button>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -126,18 +162,7 @@ function ImageSearchApp() {
               />
             ))}
           </div>
-          <div className="buttons">
-            {currentPage > 1 && (
-              <Button onClick={() => setCurrentPage(currentPage - 1)}>
-                Previous
-              </Button>
-            )}
-            {currentPage < totalPages && (
-              <Button onClick={() => setCurrentPage(currentPage + 1)}>
-                Next
-              </Button>
-            )}
-          </div>
+          {renderPagination()}
         </>
       )}
       {selectedImage && (
