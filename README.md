@@ -1,11 +1,13 @@
-# React + Vite
+**React + Vite Unsplash Image Search Web App**
 
-Demo :
-https://search-img-oo4k.onrender.com/
+**Description**
+This is a web application built using React and Vite that interacts with the Unsplash API to render images based on specific keywords. It features dynamic animations from LottieFiles, pagination, and the ability for users to download images.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Features**
+* Image Search: Fetches and displays images from Unsplash based on user-entered keywords.
+* Dynamic Animations: Uses LottieFiles for engaging, dynamic animations.
+* Pagination: Allows users to navigate through multiple pages of images.
+* Image Download: Provides an option for users to download images.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Demo**
+Check out the live demo : https://search-img-oo4k.onrender.com/
